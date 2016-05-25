@@ -1,6 +1,6 @@
 module Main where
 
-import Prelude ((>>>), (<$>), bind, (<<<), ($))
+import Prelude ((>>>), (<$>), bind, ($))
 import Control.Monad.Eff.Class (liftEff)
 import Control.Monad.Eff.Console (log)
 import Data.Array (head, drop)
@@ -16,5 +16,5 @@ interp :: String -> String
 interp = tokenize >>> parse >>> evaluate >>> pretty
 
 main = do
-  code <- head <<< drop 2 <$> liftEff Process.argv
+  code <- drop 2 >>> head <$> liftEff Process.argv
   log $ maybe "" interp code
